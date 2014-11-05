@@ -1,12 +1,13 @@
 package main
 
 import (
-	"bitbucket.org/liamstask/goose/lib/goose"
 	"database/sql"
 	"fmt"
 	"log"
 	"path/filepath"
 	"time"
+
+	"bitbucket.org/liamstask/goose/lib/goose"
 )
 
 var statusCmd = &Command{
@@ -59,7 +60,10 @@ func statusRun(cmd *Command, args ...string) {
 func printMigrationStatus(db *sql.DB, version int64, script string) {
 	var row goose.MigrationRecord
 	q := fmt.Sprintf("SELECT tstamp, is_applied FROM goose_db_version WHERE version_id=%d ORDER BY tstamp DESC LIMIT 1", version)
-	e := db.QueryRow(q).Scan(&row.TStamp, &row.IsApplied)
+	var ts string
+	e := db.QueryRow(q).Scan(&ts, &row.IsApplied)
+	t, _ := time.Parse("2006-01-02 15:04:05", ts)
+	row.TStamp = t
 
 	if e != nil && e != sql.ErrNoRows {
 		log.Fatal(e)
