@@ -68,7 +68,7 @@ func runGoMigration(conf *DBConf, path string, version int64, direction bool) er
 		Import:     conf.Driver.Import,
 		Conf:       sb.String(),
 		Direction:  direction,
-		Func:       fmt.Sprintf("%v_%v", directionStr, version),
+		Func:       fmt.Sprintf("%v%v", directionStr, version),
 		InsertStmt: conf.Driver.Dialect.insertVersionSql(),
 	}
 	main, e := writeTemplateToFile(filepath.Join(d, "goose_main.go"), goMigrationDriverTemplate, td)

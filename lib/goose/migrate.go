@@ -386,13 +386,13 @@ import (
 	"database/sql"
 )
 
-// Up is executed when this migration is applied
-func Up_{{ . }}(txn *sql.Tx) {
+// Up{{ . }} is executed when this migration is applied
+func Up{{ . }}(txn *sql.Tx) {
 
 }
 
-// Down is executed when this migration is rolled back
-func Down_{{ . }}(txn *sql.Tx) {
+// Down{{ . }} is executed when this migration is rolled back
+func Down{{ . }}(txn *sql.Tx) {
 
 }
 `))
