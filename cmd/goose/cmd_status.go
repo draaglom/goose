@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"bitbucket.org/liamstask/goose/lib/goose"
+	"github.com/draaglom/goose/lib/goose"
 )
 
 var statusCmd = &Command{
